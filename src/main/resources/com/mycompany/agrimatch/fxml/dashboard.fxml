@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.mycompany.agrimatch.controller.DashboardController"
+      spacing="20" style="-fx-padding: 30;">
+
+    <Label text="Dashboard" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+
+    <HBox spacing="20">
+        <VBox spacing="4" prefWidth="170" style="-fx-background-color: #eef5ee; -fx-padding: 16; -fx-background-radius: 8;">
+            <Label fx:id="farmersCount" text="0" style="-fx-font-size: 34px; -fx-font-weight: bold;"/>
+            <Label text="Farmers"/>
+        </VBox>
+        <VBox spacing="4" prefWidth="170" style="-fx-background-color: #eef5ee; -fx-padding: 16; -fx-background-radius: 8;">
+            <Label fx:id="buyersCount" text="0" style="-fx-font-size: 34px; -fx-font-weight: bold;"/>
+            <Label text="Buyers"/>
+        </VBox>
+        <VBox spacing="4" prefWidth="170" style="-fx-background-color: #eef5ee; -fx-padding: 16; -fx-background-radius: 8;">
+            <Label fx:id="batchesCount" text="0" style="-fx-font-size: 34px; -fx-font-weight: bold;"/>
+            <Label text="Available batches"/>
+        </VBox>
+        <VBox spacing="4" prefWidth="170" style="-fx-background-color: #eef5ee; -fx-padding: 16; -fx-background-radius: 8;">
+            <Label fx:id="requestsCount" text="0" style="-fx-font-size: 34px; -fx-font-weight: bold;"/>
+            <Label text="Open requests"/>
+        </VBox>
+    </HBox>
+
+    <Label fx:id="statusLabel" text=""/>
+</VBox>

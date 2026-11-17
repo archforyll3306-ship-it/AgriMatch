@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.mycompany.agrimatch.controller.MainController"
+            prefWidth="1000" prefHeight="650">
+
+    <left>
+        <VBox spacing="10" prefWidth="190" style="-fx-background-color: #1f3d2b; -fx-padding: 20;">
+            <Label text="AgriMatch" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Button text="Dashboard" maxWidth="Infinity" onAction="#showDashboard"/>
+            <Button text="Farmers" maxWidth="Infinity" disable="true"/>
+            <Button text="Buyers" maxWidth="Infinity" disable="true"/>
+            <Button text="Matches" maxWidth="Infinity" onAction="#showMatches"/>
+        </VBox>
+    </left>
+
+    <center>
+        <StackPane fx:id="content"/>
+    </center>
+
+</BorderPane>

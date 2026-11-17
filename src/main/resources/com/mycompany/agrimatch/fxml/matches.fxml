@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      spacing="20" style="-fx-padding: 30;">
+
+    <Label text="Matches" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+    <Label text="The ranked matches table goes here (next lesson)."/>
+</VBox>
