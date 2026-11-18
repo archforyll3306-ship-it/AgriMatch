@@ -5,8 +5,33 @@
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      spacing="20" style="-fx-padding: 30;">
+      fx:controller="com.mycompany.agrimatch.controller.MatchesController"
+      spacing="16" style="-fx-padding: 30;">
 
     <Label text="Matches" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
-    <Label text="The ranked matches table goes here (next lesson)."/>
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label text="Buyer request:"/>
+        <ComboBox fx:id="requestBox" prefWidth="460" promptText="Choose an open request"/>
+    </HBox>
+
+    <Label fx:id="requestInfo" text=""/>
+
+    <TableView fx:id="matchTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="rankCol"     text="#"         prefWidth="40"/>
+            <TableColumn fx:id="farmerCol"   text="Farmer"    prefWidth="170"/>
+            <TableColumn fx:id="batchCol"    text="Batch"     prefWidth="70"/>
+            <TableColumn fx:id="priceCol"    text="Price/kg"  prefWidth="90"/>
+            <TableColumn fx:id="distanceCol" text="Distance"  prefWidth="90"/>
+            <TableColumn fx:id="daysCol"     text="Days left" prefWidth="90"/>
+            <TableColumn fx:id="scoreCol"    text="Score"     prefWidth="80"/>
+            <TableColumn fx:id="qtyCol"      text="Suggested" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <Button fx:id="reserveButton" text="Reserve selected batch" onAction="#onReserve" disable="true"/>
+        <Label fx:id="statusLabel" text=""/>
+    </HBox>
 </VBox>

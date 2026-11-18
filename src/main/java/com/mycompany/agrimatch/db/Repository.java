@@ -57,4 +57,13 @@ public final class Repository {
         }
         return out;
     }
+        /** Kg already held or sold for a request (PENDING, CONFIRMED or COMPLETED reservations). */
+    public static double reservedForRequest(int requestId) throws SQLException {
+        String sql = "SELECT COALESCE(SUM(reserved_quantity),0) FROM reservations "
+                   + "WHERE request_id=? AND status IN ('PENDING','CONFIRMED','COMPLETED')";
+        try (Connection c = DBConnection.get(); PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, requestId);
+            try (ResultSet rs = ps.executeQuery()) { rs.next(); return rs.getDouble(1); }
+        }
+    }
 }
