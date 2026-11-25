@@ -14,7 +14,7 @@ public class BatchService {
         if (harvestDate.isAfter(LocalDate.now()))
             throw new IllegalStateException("Harvest date cannot be in the future.");
 
-        try (Connection c = DBConnection.getConnection()) {
+        try (Connection c = DBConnection.get()) {
             int shelfLife = lookupShelfLife(c, cropId);          // also proves the crop exists
             requireExists(c, "SELECT 1 FROM farmers WHERE farmer_id = ?", farmerId, "Farmer not found.");
 

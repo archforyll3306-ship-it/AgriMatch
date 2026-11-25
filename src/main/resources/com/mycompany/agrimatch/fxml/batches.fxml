@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="Infinity" maxWidth="Infinity" prefHeight="650.0" prefWidth="780.0" spacing="16.0" styleClass="page" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.agrimatch.controller.BatchesController">
+   <stylesheets>
+      <URL value="@../css/styles.css" />
+   </stylesheets>
+   <padding>
+      <Insets bottom="24.0" left="28.0" right="28.0" top="24.0" />
+   </padding>
+   <children>
+      <HBox alignment="CENTER_LEFT" spacing="12.0">
+         <children>
+            <VBox spacing="2.0">
+               <children>
+                  <Label styleClass="page-title" text="Batches" />
+                  <Label styleClass="page-subtitle" text="List a harvested batch; it becomes available for matching" />
+               </children>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#onRefresh" styleClass="btn-secondary" text="Refresh" />
+         </children>
+      </HBox>
+      <VBox spacing="12.0" styleClass="card">
+         <padding>
+            <Insets bottom="16.0" left="18.0" right="18.0" top="16.0" />
+         </padding>
+         <children>
+            <Label styleClass="section-title" text="List a batch" />
+            <HBox alignment="BOTTOM_LEFT" spacing="12.0">
+               <children>
+                  <VBox maxWidth="Infinity" spacing="4.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="field-label" text="Farmer" />
+                        <ComboBox fx:id="farmerBox" maxWidth="Infinity" promptText="Choose a farmer" />
+                     </children>
+                  </VBox>
+                  <VBox maxWidth="Infinity" spacing="4.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="field-label" text="Crop" />
+                        <ComboBox fx:id="cropBox" maxWidth="Infinity" promptText="Choose a crop" />
+                     </children>
+                  </VBox>
+                  <VBox maxWidth="Infinity" spacing="4.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="field-label" text="Quantity (kg)" />
+                        <TextField fx:id="qtyField" maxWidth="Infinity" promptText="e.g. 100" />
+                     </children>
+                  </VBox>
+                  <VBox maxWidth="Infinity" spacing="4.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="field-label" text="Price per kg" />
+                        <TextField fx:id="priceField" maxWidth="Infinity" promptText="e.g. 45" />
+                     </children>
+                  </VBox>
+                  <VBox maxWidth="Infinity" spacing="4.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="field-label" text="Harvest date" />
+                        <DatePicker fx:id="harvestPicker" maxWidth="Infinity" />
+                     </children>
+                  </VBox>
+                  <Button mnemonicParsing="false" onAction="#onAdd" styleClass="btn-primary" text="Add batch" />
+                  <Button mnemonicParsing="false" onAction="#onClear" styleClass="btn-secondary" text="Clear" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Label fx:id="statusLabel" maxWidth="Infinity" styleClass="status-label" text="" />
+      <VBox maxHeight="Infinity" spacing="12.0" styleClass="card" VBox.vgrow="ALWAYS">
+         <padding>
+            <Insets bottom="16.0" left="18.0" right="18.0" top="16.0" />
+         </padding>
+         <children>
+            <Label styleClass="section-title" text="All batches" />
+            <TableView fx:id="dataTable" maxHeight="Infinity" VBox.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="idCol" prefWidth="50.0" text="ID" />
+                  <TableColumn fx:id="farmerCol" prefWidth="160.0" text="Farmer" />
+                  <TableColumn fx:id="cropCol" prefWidth="100.0" text="Crop" />
+                  <TableColumn fx:id="qtyCol" prefWidth="90.0" text="Quantity" />
+                  <TableColumn fx:id="priceCol" prefWidth="80.0" text="Price" />
+                  <TableColumn fx:id="harvestCol" prefWidth="100.0" text="Harvested" />
+                  <TableColumn fx:id="statusCol" prefWidth="100.0" text="Status" />
+               </columns>
+               <columnResizePolicy>
+                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+               <placeholder>
+                  <Label styleClass="placeholder-text" text="No batches yet" />
+               </placeholder>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</VBox>

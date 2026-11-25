@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="Infinity" maxWidth="Infinity" prefHeight="650.0" prefWidth="780.0" spacing="16.0" styleClass="page" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.agrimatch.controller.RequestsController">
+   <stylesheets>
+      <URL value="@../css/styles.css" />
+   </stylesheets>
+   <padding>
+      <Insets bottom="24.0" left="28.0" right="28.0" top="24.0" />
+   </padding>
+   <children>
+      <HBox alignment="CENTER_LEFT" spacing="12.0">
+         <children>
+            <VBox spacing="2.0">
+               <children>
+                  <Label styleClass="page-title" text="Requests" />
+                  <Label styleClass="page-subtitle" text="Record what buyers want, then match them on the Matches screen" />
+               </children>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="cancelButton" disable="true" mnemonicParsing="false" onAction="#onCancel" styleClass="btn-secondary" text="Cancel selected request" />
+            <Button mnemonicParsing="false" onAction="#onRefresh" styleClass="btn-secondary" text="Refresh" />
+         </children>
+      </HBox>
+      <VBox spacing="12.0" styleClass="card">
+         <padding>
+            <Insets bottom="16.0" left="18.0" right="18.0" top="16.0" />
+         </padding>
+         <children>
+            <Label styleClass="section-title" text="New buyer request" />
+            <HBox alignment="BOTTOM_LEFT" spacing="12.0">
+               <children>
+                  <VBox maxWidth="Infinity" spacing="4.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="field-label" text="Buyer" />
+                        <ComboBox fx:id="buyerBox" maxWidth="Infinity" promptText="Choose a buyer" />
+                     </children>
+                  </VBox>
+                  <VBox maxWidth="Infinity" spacing="4.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="field-label" text="Crop" />
+                        <ComboBox fx:id="cropBox" maxWidth="Infinity" promptText="Choose a crop" />
+                     </children>
+                  </VBox>
+                  <VBox maxWidth="Infinity" spacing="4.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="field-label" text="Quantity (kg)" />
+                        <TextField fx:id="qtyField" maxWidth="Infinity" promptText="e.g. 50" />
+                     </children>
+                  </VBox>
+                  <VBox maxWidth="Infinity" spacing="4.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="field-label" text="Max price per kg (optional)" />
+                        <TextField fx:id="maxPriceField" maxWidth="Infinity" promptText="blank = no limit" />
+                     </children>
+                  </VBox>
+                  <Button mnemonicParsing="false" onAction="#onAdd" styleClass="btn-primary" text="Add request" />
+                  <Button mnemonicParsing="false" onAction="#onClear" styleClass="btn-secondary" text="Clear" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Label fx:id="statusLabel" maxWidth="Infinity" styleClass="status-label" text="" />
+      <VBox maxHeight="Infinity" spacing="12.0" styleClass="card" VBox.vgrow="ALWAYS">
+         <padding>
+            <Insets bottom="16.0" left="18.0" right="18.0" top="16.0" />
+         </padding>
+         <children>
+            <Label styleClass="section-title" text="All requests" />
+            <TableView fx:id="dataTable" maxHeight="Infinity" VBox.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="idCol" prefWidth="50.0" text="ID" />
+                  <TableColumn fx:id="buyerCol" prefWidth="150.0" text="Buyer" />
+                  <TableColumn fx:id="cropCol" prefWidth="90.0" text="Crop" />
+                  <TableColumn fx:id="qtyCol" prefWidth="80.0" text="Wanted" />
+                  <TableColumn fx:id="priceCol" prefWidth="90.0" text="Max price" />
+                  <TableColumn fx:id="reservedCol" prefWidth="80.0" text="Reserved" />
+                  <TableColumn fx:id="statusCol" prefWidth="130.0" text="Status" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+               <placeholder>
+                  <Label styleClass="placeholder-text" text="No requests yet" />
+               </placeholder>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</VBox>

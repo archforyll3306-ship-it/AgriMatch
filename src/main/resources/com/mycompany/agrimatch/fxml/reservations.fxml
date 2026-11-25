@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="Infinity" maxWidth="Infinity" prefHeight="650.0" prefWidth="780.0" spacing="16.0" styleClass="page" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.agrimatch.controller.ReservationsController">
+   <stylesheets>
+      <URL value="@../css/styles.css" />
+   </stylesheets>
+   <padding>
+      <Insets bottom="24.0" left="28.0" right="28.0" top="24.0" />
+   </padding>
+   <children>
+      <HBox alignment="CENTER_LEFT" spacing="12.0">
+         <children>
+            <VBox spacing="2.0">
+               <children>
+                  <Label styleClass="page-title" text="Reservations" />
+                  <Label styleClass="page-subtitle" text="Confirm, complete or cancel reservations made from Matches" />
+               </children>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="confirmButton" disable="true" mnemonicParsing="false" onAction="#onConfirm" styleClass="btn-secondary" text="Confirm" />
+            <Button fx:id="completeButton" disable="true" mnemonicParsing="false" onAction="#onComplete" styleClass="btn-primary" text="Complete sale" />
+            <Button fx:id="cancelButton" disable="true" mnemonicParsing="false" onAction="#onCancel" styleClass="btn-secondary" text="Cancel" />
+            <Button mnemonicParsing="false" onAction="#onMarkSpoiled" styleClass="btn-secondary" text="Mark expired as spoiled" />
+            <Button mnemonicParsing="false" onAction="#onRefresh" styleClass="btn-secondary" text="Refresh" />
+         </children>
+      </HBox>
+      <Label fx:id="statusLabel" maxWidth="Infinity" styleClass="status-label" text="" />
+      <VBox maxHeight="Infinity" spacing="12.0" styleClass="card" VBox.vgrow="ALWAYS">
+         <padding>
+            <Insets bottom="16.0" left="18.0" right="18.0" top="16.0" />
+         </padding>
+         <children>
+            <Label styleClass="section-title" text="All reservations" />
+            <TableView fx:id="dataTable" maxHeight="Infinity" VBox.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="idCol" prefWidth="50.0" text="ID" />
+                  <TableColumn fx:id="buyerCol" prefWidth="120.0" text="Buyer" />
+                  <TableColumn fx:id="farmerCol" prefWidth="120.0" text="Farmer" />
+                  <TableColumn fx:id="cropCol" prefWidth="80.0" text="Crop" />
+                  <TableColumn fx:id="qtyCol" prefWidth="70.0" text="Qty" />
+                  <TableColumn fx:id="priceCol" prefWidth="70.0" text="Price" />
+                  <TableColumn fx:id="distCol" prefWidth="80.0" text="Distance" />
+                  <TableColumn fx:id="statusCol" prefWidth="100.0" text="Status" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+               <placeholder>
+                  <Label styleClass="placeholder-text" text="No reservations yet" />
+               </placeholder>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</VBox>

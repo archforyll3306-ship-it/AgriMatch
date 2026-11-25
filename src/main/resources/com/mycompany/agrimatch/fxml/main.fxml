@@ -29,7 +29,10 @@
             <Button fx:id="navDashboard" alignment="CENTER_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showDashboard" styleClass="nav-button" text="Dashboard" />
             <Button fx:id="navFarmers" alignment="CENTER_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showFarmers" styleClass="nav-button" text="Farmers" />
             <Button fx:id="navBuyers" alignment="CENTER_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showBuyers" styleClass="nav-button" text="Buyers" />
+            <Button fx:id="navBatches" alignment="CENTER_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showBatches" styleClass="nav-button" text="Batches" />
+            <Button fx:id="navRequests" alignment="CENTER_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showRequests" styleClass="nav-button" text="Requests" />
             <Button fx:id="navMatches" alignment="CENTER_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showMatches" styleClass="nav-button" text="Matches" />
+            <Button fx:id="navReservations" alignment="CENTER_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showReservations" styleClass="nav-button" text="Reservations" />
             <Region VBox.vgrow="ALWAYS" />
             <Label styleClass="sidebar-footer" text="v1.0-SNAPSHOT" />
          </children>

@@ -87,4 +87,47 @@ public final class Repository {
         }
         return out;
     }
+
+    // ---- list views for the Batches / Requests / Reservations screens ----
+
+    public static List<BatchRow> batchRows() throws SQLException {
+        List<BatchRow> out = new ArrayList<>();
+        String sql = "SELECT b.batch_id, f.full_name, c.crop_name, b.quantity, b.price_per_kg, b.harvest_date, b.status "
+                   + "FROM crop_batches b JOIN farmers f USING(farmer_id) JOIN crops c USING(crop_id) "
+                   + "ORDER BY b.batch_id DESC";
+        try (Connection c = DBConnection.get(); ResultSet rs = c.createStatement().executeQuery(sql)) {
+            while (rs.next()) out.add(new BatchRow(rs.getInt(1), rs.getString(2), rs.getString(3),
+                    rs.getDouble(4), rs.getDouble(5), rs.getDate(6).toLocalDate(), rs.getString(7)));
+        }
+        return out;
+    }
+
+    public static List<RequestRow> requestRows() throws SQLException {
+        List<RequestRow> out = new ArrayList<>();
+        String sql = "SELECT r.request_id, b.full_name, c.crop_name, r.requested_quantity, r.max_price_per_kg, r.status, "
+                   + "COALESCE((SELECT SUM(x.reserved_quantity) FROM reservations x WHERE x.request_id=r.request_id "
+                   + "AND x.status IN ('PENDING','CONFIRMED','COMPLETED')),0) AS reserved "
+                   + "FROM buyer_requests r JOIN buyers b USING(buyer_id) JOIN crops c USING(crop_id) "
+                   + "ORDER BY r.request_id DESC";
+        try (Connection c = DBConnection.get(); ResultSet rs = c.createStatement().executeQuery(sql)) {
+            while (rs.next()) out.add(new RequestRow(rs.getInt(1), rs.getString(2), rs.getString(3),
+                    rs.getDouble(4), dbl(rs, "max_price_per_kg"), rs.getString(6), rs.getDouble(7)));
+        }
+        return out;
+    }
+
+    public static List<ReservationRow> reservationRows() throws SQLException {
+        List<ReservationRow> out = new ArrayList<>();
+        String sql = "SELECT v.reservation_id, v.request_id, v.batch_id, bu.full_name AS buyer, f.full_name AS farmer, "
+                   + "c.crop_name, v.reserved_quantity, v.agreed_price_per_kg, v.distance_km, v.status "
+                   + "FROM reservations v JOIN buyer_requests r USING(request_id) JOIN buyers bu USING(buyer_id) "
+                   + "JOIN crop_batches b ON b.batch_id=v.batch_id JOIN farmers f ON f.farmer_id=b.farmer_id "
+                   + "JOIN crops c ON c.crop_id=b.crop_id ORDER BY v.reservation_id DESC";
+        try (Connection c = DBConnection.get(); ResultSet rs = c.createStatement().executeQuery(sql)) {
+            while (rs.next()) out.add(new ReservationRow(rs.getInt(1), rs.getInt(2), rs.getInt(3),
+                    rs.getString(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8),
+                    dbl(rs, "distance_km"), rs.getString(10)));
+        }
+        return out;
+    }
 }
