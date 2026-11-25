@@ -66,4 +66,23 @@ public final class Repository {
             try (ResultSet rs = ps.executeQuery()) { rs.next(); return rs.getDouble(1); }
         }
     }
+        public static List<Barangay> barangays() throws SQLException {
+        List<Barangay> out = new ArrayList<>();
+        try (Connection c = DBConnection.get();
+             ResultSet rs = c.createStatement().executeQuery("SELECT * FROM barangays ORDER BY name")) {
+            while (rs.next()) out.add(new Barangay(rs.getInt("barangay_id"), rs.getString("name"),
+                    rs.getDouble("latitude"), rs.getDouble("longitude")));
+        }
+        return out;
+    }
+
+    public static List<Crop> crops() throws SQLException {
+        List<Crop> out = new ArrayList<>();
+        try (Connection c = DBConnection.get();
+             ResultSet rs = c.createStatement().executeQuery("SELECT * FROM crops ORDER BY crop_name")) {
+            while (rs.next()) out.add(new Crop(rs.getInt("crop_id"), rs.getString("crop_name"),
+                    rs.getInt("shelf_life_days")));
+        }
+        return out;
+    }
 }
