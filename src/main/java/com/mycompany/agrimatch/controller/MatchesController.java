@@ -73,6 +73,9 @@ public class MatchesController {
             @Override public BuyerRequest fromString(String s) { return null; }
         });
 
+        requestInfo.visibleProperty().bind(requestInfo.textProperty().isNotEmpty());
+        requestInfo.managedProperty().bind(requestInfo.visibleProperty());
+
         requestBox.setOnAction(e -> showMatches());
         matchTable.getSelectionModel().selectedItemProperty().addListener(
                 (obs, oldItem, newItem) -> reserveButton.setDisable(newItem == null));
@@ -93,7 +96,7 @@ public class MatchesController {
             matchTable.getItems().clear();
             requestInfo.setText("");
         } catch (SQLException e) {
-            statusLabel.setText("Database error: " + e.getMessage());
+            setStatus("Database error: " + e.getMessage(), true);
         }
     }
 
@@ -120,10 +123,24 @@ public class MatchesController {
                     ? "no price limit" : String.format("max P%.2f/kg", req.maxPricePerKg());
             requestInfo.setText(String.format("%s still needs %.0f kg of %s (%s). %d matching batch(es).",
                     buyer.name(), needed, req.cropName(), limit, results.size()));
-            statusLabel.setText("");
+            setStatus("", false);
         } catch (SQLException e) {
-            statusLabel.setText("Database error: " + e.getMessage());
+            setStatus("Database error: " + e.getMessage(), true);
         }
+    }
+
+    /** Called when the Refresh button is clicked. */
+    @FXML
+    private void onRefresh() {
+        loadData();
+        setStatus("", false);
+    }
+
+    /** Shows a message under the table; green when ok, red when it is an error. */
+    private void setStatus(String message, boolean error) {
+        statusLabel.getStyleClass().setAll("label", "status-label");
+        if (!message.isEmpty()) statusLabel.getStyleClass().add(error ? "status-error" : "status-success");
+        statusLabel.setText(message);
     }
 
     /** Called when the Reserve button is clicked. */
@@ -145,11 +162,11 @@ public class MatchesController {
             int id = ReservationService.reserve(currentRequest.id(), m.batch().batchId(),
                     m.suggestedQty(), m.batch().pricePerKg(), m.distanceKm(), m.total());
             loadData();                                   // refresh: the request may now be fulfilled
-            statusLabel.setText("Reservation #" + id + " created.");
+            setStatus("Reservation #" + id + " created.", false);
         } catch (IllegalStateException e) {
-            statusLabel.setText("Cannot reserve: " + e.getMessage());
+            setStatus("Cannot reserve: " + e.getMessage(), true);
         } catch (SQLException e) {
-            statusLabel.setText("Database error: " + e.getMessage());
+            setStatus("Database error: " + e.getMessage(), true);
         }
     }
 }

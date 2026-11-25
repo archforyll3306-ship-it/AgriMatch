@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="Infinity" maxWidth="Infinity" prefHeight="650.0" prefWidth="780.0" spacing="16.0" styleClass="page" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.agrimatch.controller.FarmersController">
+   <stylesheets>
+      <URL value="@../css/styles.css" />
+   </stylesheets>
+   <padding>
+      <Insets bottom="24.0" left="28.0" right="28.0" top="24.0" />
+   </padding>
+   <children>
+      <HBox alignment="CENTER_LEFT" spacing="12.0">
+         <children>
+            <VBox spacing="2.0">
+               <children>
+                  <Label styleClass="page-title" text="Farmers" />
+                  <Label styleClass="page-subtitle" text="Register a new farmer and browse existing records" />
+               </children>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#onRefresh" styleClass="btn-secondary" text="Refresh" />
+         </children>
+      </HBox>
+      <VBox spacing="12.0" styleClass="card">
+         <padding>
+            <Insets bottom="16.0" left="18.0" right="18.0" top="16.0" />
+         </padding>
+         <children>
+            <Label styleClass="section-title" text="Register a farmer" />
+            <HBox alignment="BOTTOM_LEFT" spacing="12.0">
+               <children>
+                  <VBox maxWidth="Infinity" spacing="4.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="field-label" text="Full name" />
+                        <TextField fx:id="nameField" maxWidth="Infinity" promptText="e.g. Juan Dela Cruz" />
+                     </children>
+                  </VBox>
+                  <VBox maxWidth="Infinity" spacing="4.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="field-label" text="Contact number" />
+                        <TextField fx:id="contactField" maxWidth="Infinity" onAction="#onAdd" promptText="e.g. 09171234567" />
+                     </children>
+                  </VBox>
+                  <VBox maxWidth="Infinity" spacing="4.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="field-label" text="Barangay" />
+                        <ComboBox fx:id="barangayBox" maxWidth="Infinity" promptText="Choose a barangay" />
+                     </children>
+                  </VBox>
+                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAdd" styleClass="btn-primary" text="Add farmer" />
+                  <Button mnemonicParsing="false" onAction="#onClear" styleClass="btn-secondary" text="Clear" />
+               </children>
+            </HBox>
+            <Label fx:id="statusLabel" maxWidth="Infinity" styleClass="status-label" text="" />
+         </children>
+      </VBox>
+      <VBox maxHeight="Infinity" spacing="12.0" styleClass="card" VBox.vgrow="ALWAYS">
+         <padding>
+            <Insets bottom="16.0" left="18.0" right="18.0" top="16.0" />
+         </padding>
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <Label styleClass="section-title" text="Registered farmers" />
+                  <Label fx:id="countLabel" styleClass="page-subtitle" text="" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <TextField fx:id="searchField" prefWidth="280.0" promptText="Search name, number or address" />
+               </children>
+            </HBox>
+            <TableView fx:id="dataTable" maxHeight="Infinity" VBox.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="idCol" maxWidth="70.0" minWidth="45.0" prefWidth="55.0" text="ID" />
+                  <TableColumn fx:id="nameCol" prefWidth="200.0" text="Name" />
+                  <TableColumn fx:id="contactCol" prefWidth="130.0" text="Contact" />
+                  <TableColumn fx:id="addressCol" prefWidth="220.0" text="Address" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+               <placeholder>
+                  <Label styleClass="placeholder-text" text="No farmers found" />
+               </placeholder>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</VBox>

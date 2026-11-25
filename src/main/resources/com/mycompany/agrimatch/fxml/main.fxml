@@ -1,25 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.mycompany.agrimatch.controller.MainController"
-            prefWidth="1000" prefHeight="650">
-
-    <left>
-        <VBox spacing="10" prefWidth="190" style="-fx-background-color: #1f3d2b; -fx-padding: 20;">
-            <Label text="AgriMatch" style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;"/>
-            <Button text="Dashboard" maxWidth="Infinity" onAction="#showDashboard"/>
-            <Button text="Farmers" maxWidth="Infinity" disable="true"/>
-            <Button text="Buyers" maxWidth="Infinity" disable="true"/>
-            <Button text="Matches" maxWidth="Infinity" onAction="#showMatches"/>
-        </VBox>
-    </left>
-
-    <center>
-        <StackPane fx:id="content"/>
-    </center>
-
+<BorderPane prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.agrimatch.controller.MainController">
+   <stylesheets>
+      <URL value="@../css/styles.css" />
+   </stylesheets>
+   <left>
+      <VBox minWidth="220.0" prefWidth="220.0" spacing="6.0" styleClass="sidebar" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="20.0" left="14.0" right="14.0" top="22.0" />
+         </padding>
+         <children>
+            <VBox spacing="2.0" styleClass="brand-box">
+               <children>
+                  <Label styleClass="brand-title" text="AgriMatch" />
+                  <Label styleClass="brand-subtitle" text="Surplus &amp; buyer matching" />
+               </children>
+            </VBox>
+            <Label styleClass="nav-section" text="MENU" />
+            <Button fx:id="navDashboard" alignment="CENTER_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showDashboard" styleClass="nav-button" text="Dashboard" />
+            <Button fx:id="navFarmers" alignment="CENTER_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showFarmers" styleClass="nav-button" text="Farmers" />
+            <Button fx:id="navBuyers" alignment="CENTER_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showBuyers" styleClass="nav-button" text="Buyers" />
+            <Button fx:id="navMatches" alignment="CENTER_LEFT" maxWidth="Infinity" mnemonicParsing="false" onAction="#showMatches" styleClass="nav-button" text="Matches" />
+            <Region VBox.vgrow="ALWAYS" />
+            <Label styleClass="sidebar-footer" text="v1.0-SNAPSHOT" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <StackPane fx:id="content" styleClass="content-area" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>
